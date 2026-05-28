@@ -10,8 +10,9 @@ Usage:
 
 import os
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from dotenv import load_dotenv
+from strategy import SLOW_PERIOD as _STRATEGY_SLOW_PERIOD
 
 # Load variables from .env into the process environment.
 # If .env doesn't exist the script falls back to real env vars,
@@ -71,10 +72,10 @@ def load_settings() -> Settings:
     except ValueError as exc:
         raise ValueError("CANDLE_LIMIT must be an integer.") from exc
 
-    if candle_limit < 200:
+    if candle_limit < _STRATEGY_SLOW_PERIOD:
         raise ValueError(
-            f"CANDLE_LIMIT is {candle_limit}, but at least 200 candles are "
-            "required to compute the 200-period SMA."
+            f"CANDLE_LIMIT is {candle_limit}, but at least {_STRATEGY_SLOW_PERIOD} candles are "
+            "required to compute the slow SMA."
         )
 
     try:

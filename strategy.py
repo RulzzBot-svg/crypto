@@ -36,7 +36,7 @@ def _validate_ohlcv(df: pd.DataFrame) -> None:
     if missing:
         raise ValueError(f"DataFrame is missing columns: {missing}")
 
-    min_rows = SLOW_PERIOD + 1  # need at least one previous row for crossover
+    min_rows = SLOW_PERIOD + 2  # need current row + one previous row to detect crossover
     if len(df) < min_rows:
         raise ValueError(
             f"Not enough data: {len(df)} rows provided, "

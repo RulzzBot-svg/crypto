@@ -34,7 +34,6 @@ from typing import Optional
 import ccxt
 import pandas as pd
 
-import strategy  # noqa: F401  (imported for the generate_signal alias below)
 from config import settings
 from strategy import generate_signal
 
